@@ -16,9 +16,7 @@ function App() {
 
     const fetchData = async () => {
         try {
-            const res = await fetch(
-                `http://numbersapi.com/${month}/${day}/date`
-            );
+            const res = await fetch(`https://numbersapi.com/${month}/${day}/date`);
             if (!res.ok) {
                 setIsApiAccessible(false);
                 throw new Error("Failed to fetch data");
@@ -27,9 +25,11 @@ function App() {
             const data = await res.text();
             setData(data);
         } catch (error) {
+            setIsApiAccessible(false); // Handle the error by setting isApiAccessible to false
             console.error("Error fetching data:", error);
         }
     };
+
 
     const handleDateChange = (event) => {
         const selectedDate = event.target.value;
@@ -100,7 +100,9 @@ function App() {
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen
+                                    controls // Add the 'controls' attribute
                                 ></iframe>
+
                             </div>
                         </>
 
