@@ -1,0 +1,48 @@
+/* App.css */
+@keyframes rainbow {
+    0% {
+      color: #ff4136; /* Red */
+    }
+    20% {
+      color: #f012be; /* Violet */
+    }
+    40% {
+      color: #0074d9; /* Blue */
+    }
+    60% {
+      color: #ffdc00; /* Yellow */
+    }
+    80% {
+      color: #2ecc40; /* Green */
+    }
+    100% {
+      color: #ff851b; /* Orange */
+    }
+  }
+  
+  .animated-header {
+    animation: rainbow 5s infinite;
+  }
+
+  /* custom.css */
+.card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px) rotateX(10deg);
+  }
+  
+  .animated-header {
+    animation: rainbow 5s infinite;
+  }
+  
+  body {
+    font-family: 'Pacifico', cursive;
+  }
+  
