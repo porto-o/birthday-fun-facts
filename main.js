@@ -52,62 +52,33 @@ function App() {
             <h1 className="animated-header">Fun fact based on your birthday</h1>
             <Card className="shadow-sm card">
                 <Card.Body>
-                    <Form>
-                        <Form.Group>
-                            <Form.Label>Select a Date:</Form.Label>
-                            <input
-                                type="date"
-                                value={`2023-${month}-${day}`}
-                                onChange={handleDateChange}
-                                max="2023-12-31"
-                                min="2023-01-01"
-                            />
-                        </Form.Group>
-                    </Form>
-                    <Button variant="primary" onClick={handleSearchClick}>
-                        Search for another fun fact
-                    </Button>
-                    {isApiAccessible ? (
-                        data && (
-                            <Card className="result-card mt-4">
-                                <Card.Body>
-                                    <Card.Text>{data}</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        )
-                    ) : (
-                        <>
-                            <div
-                                style={{
-                                    backgroundColor: "yellow",
-                                    padding: "10px",
-                                    margin: "10px 0",
-                                    borderRadius: "5px",
-                                    fontWeight: "bold",
-                                }}
-                            >
-                                I'm sorry, but the Birthday Fun Facts is not currently accessible due
-                                to a lack of HTTPS support from the NumbersAPI. However, you can watch the
-                                video below to see how it works.
-                            </div>
-                            <div className="video-container mt-4">
-                                <h3>Showcase video</h3>
-                                <iframe
-                                    width="560"
-                                    height="315"
-                                    src="./assets/video.mp4"
-                                    title="Fun Video"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen
-                                    controls // Add the 'controls' attribute
-                                ></iframe>
+                    <div
+                        style={{
+                            backgroundColor: "yellow",
+                            padding: "10px",
+                            margin: "10px 0",
+                            borderRadius: "5px",
+                            fontWeight: "bold",
+                        }}
+                    >
+                        I'm sorry, but the Birthday Fun Facts is not currently accessible due
+                        to a lack of HTTPS support from the NumbersAPI. However, you can watch the
+                        video below to see how it works.
+                    </div>
+                    <div className="video-container mt-4">
+                        <h3>Showcase video</h3>
+                        <iframe
+                            width="560"
+                            height="315"
+                            src="./assets/video.mp4"
+                            title="Fun Video"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            controls // Add the 'controls' attribute
+                        ></iframe>
 
-                            </div>
-                        </>
-
-
-                    )}
+                    </div>
                 </Card.Body>
             </Card>
         </Container>
