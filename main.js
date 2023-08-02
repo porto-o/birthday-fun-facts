@@ -7,16 +7,29 @@ function App() {
     const [month, setMonth] = useState("01");
     const [year, setYear] = useState("2023");
     const [url, setUrl] = useState(`http://numbersapi.com/${month}/${day}/date`);
+    const [isApiAccessible, setIsApiAccessible] = useState(true);
 
     useEffect(() => {
         console.log("Rendering App");
-        const fetchData = async () => {
-            const res = await axios(url);
-            setData(res.data);
-            console.log(res.data);
-        };
         fetchData();
     }, [year]);
+
+    const fetchData = async () => {
+        try {
+            const res = await fetch(
+                `http://numbersapi.com/${month}/${day}/date`
+            );
+            if (!res.ok) {
+                setIsApiAccessible(false);
+                throw new Error("Failed to fetch data");
+            }
+            setIsApiAccessible(true);
+            const data = await res.text();
+            setData(data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
 
     const handleDateChange = (event) => {
         const selectedDate = event.target.value;
@@ -31,7 +44,6 @@ function App() {
 
     const handleSearchClick = () => {
         setUrl(`http://numbersapi.com/${month}/${day}/date`);
-        // random year between 2023 and 2025
         setYear(Math.floor(Math.random() * 3) + 1976);
     };
 
@@ -55,12 +67,44 @@ function App() {
                     <Button variant="primary" onClick={handleSearchClick}>
                         Search for another fun fact
                     </Button>
-                    {data && (
-                        <Card className="result-card mt-4">
-                            <Card.Body>
-                                <Card.Text>{data}</Card.Text>
-                            </Card.Body>
-                        </Card>
+                    {isApiAccessible ? (
+                        data && (
+                            <Card className="result-card mt-4">
+                                <Card.Body>
+                                    <Card.Text>{data}</Card.Text>
+                                </Card.Body>
+                            </Card>
+                        )
+                    ) : (
+                        <>
+                            <div
+                                style={{
+                                    backgroundColor: "yellow",
+                                    padding: "10px",
+                                    margin: "10px 0",
+                                    borderRadius: "5px",
+                                    fontWeight: "bold",
+                                }}
+                            >
+                                I'm sorry, but the Birthday Fun Facts is not currently accessible due
+                                to a lack of HTTPS support from the NumbersAPI. However, you can watch the
+                                video below to see how it works.
+                            </div>
+                            <div className="video-container mt-4">
+                                <h3>Showcase video</h3>
+                                <iframe
+                                    width="560"
+                                    height="315"
+                                    src="./assets/video.mp4"
+                                    title="Fun Video"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                ></iframe>
+                            </div>
+                        </>
+
+
                     )}
                 </Card.Body>
             </Card>
